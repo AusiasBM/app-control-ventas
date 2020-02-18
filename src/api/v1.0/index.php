@@ -21,56 +21,28 @@ $uri = explode(API_VERSION.'/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
 $uri_array = explode('/',$uri);
 
 // Extraer el primer elementos de un array
-$recurso = array_shift($uri_array);
+$recurso = array_shift($uri_array); // ventas
 
 //echo $recurso;
 
 // Guardamos la acción en minúsculas
-$operacion = strtolower($_SERVER['REQUEST_METHOD']);
+$operacion = strtolower($_SERVER['REQUEST_METHOD']); // get
 
-switch ($operacion) {
-    case 'get':
-        $sql = 'SELECT vendedores.nombre as nombreVendedor, 
-                       vendedores.apellidos as apellidosVendedor,
-                       clientes.nombre as nombreCliente, ventas.* 
-                FROM ventas, vendedores, clientes 
-                WHERE ventas.vendedor = vendedores.id 
-                      AND ventas.cliente = clientes.id';
+$vista = 'json';
 
-        $res = mysqli_query($conexion, $sql);
+$salida = array();
 
-        $resultado = array();
+$http_code = 404;
 
-        while($fila = mysqli_fetch_assoc($res)){
-            $vendedor = array("id" => $fila["vendedor"],
-                              "nombre" => $fila["nombreVendedor"],
-                              "apellidos" => $fila["apellidosVendedor"]);
+@include "modelos/$operacion-$recurso.php"; // modelos/get-ventas.php
 
-            $cliente = array("id" => $fila["cliente"],
-                             "nombre" => $fila["nombreCliente"]);
-
-            $fila["vendedor"] = $vendedor;
-
-            $fila["cliente"] = $cliente;
-
-            unset($fila["nombreVendedor"]);
-            unset($fila["apellidosVendedor"]);
-            unset($fila["nombreCliente"]);
-
-            array_push($resultado, $fila);
-        }
-        break;
-}
-// Corta el flujo de la aplicación
+// Corta el flujo de la aplicación, se utiliza para hacer comprobaciones.
 //die();
 
-// Evita que el domino bloquee peticiones desde diferentes sitios.
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
-header("Content-Type: application/json; charset: utf-8");
+@include "vistas/$vista.php"; // json.php
 
-echo json_encode($resultado, JSON_PRETTY_PRINT);
-/*
+
+/* Funcionamiento del principio, se puede eliminar
 $serverNombre = "localhost";
 $userNombre = "root";
 $password = "";
