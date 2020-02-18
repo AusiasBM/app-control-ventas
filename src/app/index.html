@@ -17,6 +17,8 @@
 </head>
 <body>
 
+    <select id="selectorVendedores"></select>
+
     <table>
         <!-- Encabezado de la tabla -->
         <thead>
@@ -33,7 +35,17 @@
         <tbody id="tablaVentas"></tbody>
     </table>
 
+    /<!-- si creamos una etiqueta js con src, no se pone código dentro de las etiquetas, porque lo ignorará.-->
+    <script src="js/vendedores.js"></script>
     <script>
+        VistaSelectorVendedores.preparar("selectorVendedores");
+        ControladorVendedores.iniciar();
+    </script>
+
+
+    <script>
+
+        /*
         fetch('../api/v1.0/ventas').then(function (respuesta) {
             //console.log(respuesta);
             return respuesta.json();
@@ -60,7 +72,7 @@
                 </tr>`;
             })
         });
-
+    */
 
     </script>
 
