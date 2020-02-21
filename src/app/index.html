@@ -21,6 +21,11 @@
 
     <select id="selectorClientes"></select>
 
+    <input id="selectorInicio" type="date"
+           onchange="ControladorVentas.modelo.filtrar('inicio', this.value)">
+    <input id="selectorFin" type="date"
+           onchange="ControladorVentas.modelo.filtrar('fin', this.value)">
+
     <table>
         <!-- Encabezado de la tabla -->
         <thead>
