@@ -19,6 +19,8 @@
 
     <select id="selectorVendedores"></select>
 
+    <select id="selectorClientes"></select>
+
     <table>
         <!-- Encabezado de la tabla -->
         <thead>
@@ -35,6 +37,7 @@
         <tbody id="tablaVentas"></tbody>
     </table>
 
+    <!-- Vendedores -->
     <!-- si creamos una etiqueta js con src, no se pone código dentro de las etiquetas, porque lo ignorará.-->
     <script src="js/vendedores.js"></script>
     <script>
@@ -45,12 +48,27 @@
         }
     </script>
 
+    <!-- Ventas -->
 
     <script src="js/ventas.js"></script>
 
     <script>
         VistaTablaVentas.preparar('tablaVentas');
         ControladorVentas.iniciar();
+    </script>
+
+    <script src="js/clientes.js"></script>
+
+    <!-- Clientes -->
+
+    <script src="js/clientes.js"></script>
+
+    <script>
+        VistaSelectorClientes.preparar("selectorClientes");
+        ControladorClientes.iniciar();
+        VistaSelectorClientes.selector.onchange = function () {
+            ControladorVentas.modelo.filtrar('cliente', this.value);
+        }
     </script>
 
     <script>

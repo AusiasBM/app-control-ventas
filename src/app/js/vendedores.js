@@ -12,7 +12,7 @@ let ModeloVendedores = {
         });
     }
 
-}
+};
 
 let VistaSelectorVendedores = {
     selector : {},
@@ -27,7 +27,7 @@ let VistaSelectorVendedores = {
                                         </option>`
         })
     }
-}
+};
 
 let ControladorVendedores = {
     modelo : ModeloVendedores,
