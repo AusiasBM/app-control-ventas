@@ -40,6 +40,9 @@
     <script>
         VistaSelectorVendedores.preparar("selectorVendedores");
         ControladorVendedores.iniciar();
+        VistaSelectorVendedores.selector.onchange = function () {
+            ControladorVentas.modelo.filtrar('vendedor', this.value);
+        }
     </script>
 
 
