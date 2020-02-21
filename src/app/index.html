@@ -35,7 +35,7 @@
         <tbody id="tablaVentas"></tbody>
     </table>
 
-    /<!-- si creamos una etiqueta js con src, no se pone código dentro de las etiquetas, porque lo ignorará.-->
+    <!-- si creamos una etiqueta js con src, no se pone código dentro de las etiquetas, porque lo ignorará.-->
     <script src="js/vendedores.js"></script>
     <script>
         VistaSelectorVendedores.preparar("selectorVendedores");
@@ -43,9 +43,16 @@
     </script>
 
 
+    <script src="js/ventas.js"></script>
+
+    <script>
+        VistaTablaVentas.preparar('tablaVentas');
+        ControladorVentas.iniciar();
+    </script>
+
     <script>
 
-        /*
+        /* YA NO SIRVE ---------------------------
         fetch('../api/v1.0/ventas').then(function (respuesta) {
             //console.log(respuesta);
             return respuesta.json();
