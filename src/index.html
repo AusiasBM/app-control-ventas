@@ -6,31 +6,26 @@
 </head>
 <body>
 
-    <select id="selectorVendedores" onchange="console.log(this.value)">
-        <option value="1">Opción 1</option>
-        <option value="2">Opción 2</option>
-        <option value="3">Opción 3</option>
-        <option value="4">Opción 4</option>
-
-    </select>
+  <form method="post" onsubmit="enviar(event)" id="formKey">
+      <label for="inputKey">Key: </label>
+      <input type="text" id="inputKey" name="key" required>
+      <button type="submit">Enviar</button>
+  </form>
 
     <script>
-        // nos permite hacer peticiones asincronas, no recarga la página.
-        fetch("api/vendedores.json").then(function (respuesta) {
+        function enviar(evento) {
+            evento.preventDefault();
+            fetch('api/v1.0/sesion', {
+                method : 'post',
+                body : new FormData(document.getElementById('formKey'))
+            }).then(function (respuesta) {
+                if (respuesta.status == 200){
+                    location.href = './app';
+                }else{
 
-            //console.log(respuesta);
-            return respuesta.json();
-        }).then(function (datos) {
-            //console.log(datos);
-            let selVndres = document.getElementById("selectorVendedores");
-            selVndres.innerHTML = "";
-            datos.forEach(function (item) {
-                //console.log(item);
-                selVndres.innerHTML += `<option value="${item.id}">${item.nombre}, ${item.apellido}</option>`;
+                }
             })
-
-        });
-
+        }
     </script>
 
 </body>
