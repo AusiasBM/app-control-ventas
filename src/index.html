@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Ventas</title>
+</head>
+<body>
+
+  <form method="post" onsubmit="enviar(event)" id="formKey">
+      <label for="inputKey">Key: </label>
+      <input type="text" id="inputKey" name="key" required>
+      <button type="submit">Enviar</button>
+  </form>
+
+    <script>
+        function enviar(evento) {
+            evento.preventDefault();
+            fetch('api/v1.0/sesion', {
+                method : 'post',
+                body : new FormData(document.getElementById('formKey'))
+            }).then(function (respuesta) {
+                if (respuesta.status == 200){
+                    location.href = './app';
+                }else{
+
+                }
+            })
+        }
+    </script>
+
+</body>
+</html>
