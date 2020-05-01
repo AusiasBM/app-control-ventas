@@ -22,6 +22,8 @@ let ModeloVentas = {
         fin: 0
     },
     filtrar: function (parametro, valor) {
+        console.log(valor);
+        console.log(parametro);
         this.filtros[parametro] = valor;
         let queryParams = [];
         if(this.filtros.vendedor != 0) {
